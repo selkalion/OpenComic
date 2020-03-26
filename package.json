@@ -55,6 +55,7 @@
 	},
 	"dependencies": {
 		"7zip-bin": "^4.1.0",
+		"custom-electron-titlebar": "^3.2.2-hotfix62",
 		"electron-json-storage": "^4.1.8",
 		"electron-window-state": "^5.0.3",
 		"fs": "0.0.1-security",
@@ -101,8 +102,7 @@
 			"node_modules/sharp",
 			"node_modules/node-7z",
 			"node_modules/7zip-bin",
-			"unrar",
-			"Pepper & Carrot"
+			"unrar"
 		],
 		"win": {
 			"target": [

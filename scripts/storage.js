@@ -7,6 +7,7 @@ var storageDefault = {
 		language: 'en',
 		theme: 'material-design',
 		nightMode: false,
+		hideLeft: false,
 		foldersFirst: true,
 		viewIndex: 'module',
 		view: 'module',
@@ -58,20 +59,6 @@ var storageDefault = {
 		folder: true,
 		readingProgress: {
 			path: 'Path',
-			lastReading: 0,
-			progress: 0,
-		},
-	},
-	{
-		name: 'Pepper & Carrot',
-		path: asarToAsarUnpacked(p.join(appDir, 'Pepper & Carrot')),
-		added: 0,
-		compressed: false,
-		bookmark: false,
-		folder: true,
-		readingProgress: {
-			index: 0,
-			path: '',
 			lastReading: 0,
 			progress: 0,
 		},

@@ -26,7 +26,8 @@
 		"add": "Aggiungi",
 		"language": "Lingua",
 		"theme": "Tema",
-		"nightMode": "Modalità notte"
+		"nightMode": "Modalità notte",
+		"hideLeft": "Nascondi/Mostra menu laterale"
 	},
 	"comics": {
 		"continueReading": "Continua a leggere",
@@ -68,8 +69,8 @@
 	"menu": {
 		"file": {
 			"main": "File",
-			"openFile": "Opri file",
-			"openFolder": "Opri cartella",
+			"openFile": "Apri file",
+			"openFolder": "Apri cartella",
 			"addFile": "Aggiungi file",
 			"addFolder": "Aggiungi cartella",
 			"quit": "Esci"
@@ -82,7 +83,7 @@
 			"toggleFullScreen": "A schermo intero"
 		},
 		"goto": {
-			"main": "Goto"
+			"main": "Vai a"
 		},
 		"debug": {
 			"main": "Debug",

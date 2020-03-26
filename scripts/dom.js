@@ -1347,6 +1347,7 @@ function nightMode()
 		$('.button-night-mode').html('sun');
 		handlebarsContext.nightMode = false;
 		storage.updateVar('config', 'nightMode', false);
+		MyTitleBar.updateBackground(customTitlebar.Color.fromHex('#ffffff'));
 	}
 	else
 	{
@@ -1354,6 +1355,21 @@ function nightMode()
 		$('.button-night-mode').html('moon');
 		handlebarsContext.nightMode = true;
 		storage.updateVar('config', 'nightMode', true);
+		MyTitleBar.updateBackground(customTitlebar.Color.fromHex('#212121'));
+	}
+}
+
+function fullReader()
+{
+	if($('.content-right').hasClass('full'))
+	{
+		$('.content-right').removeClass('full');
+		storage.updateVar('config', 'hideLeft', false);
+	}
+	else
+	{
+		$('.content-right').addClass('full');
+		storage.updateVar('config', 'hideLeft', true);
 	}
 }
 
@@ -1565,6 +1581,7 @@ module.exports = {
 	previousComic: skipPreviousComicF,
 	orderBy: orderBy,
 	nightMode: nightMode,
+	fullReader: fullReader,
 	addComicButtons: addComicButtons,
 	comicContextMenu: comicContextMenu,
 	removeComic: removeComic,

@@ -11,8 +11,8 @@ function createWindow () {
 	// Create the browser window.
 
 	var mainWindowState = windowStateKeeper({
-		defaultWidth: 800,
-		defaultHeight: 600
+		defaultWidth: 1200,
+		defaultHeight: 880
 	});
 
 	var image = nativeImage.createFromPath(path.join(__dirname, '../images/logo.png')); 
@@ -29,9 +29,12 @@ function createWindow () {
 		webPreferences: {
 			nodeIntegration: true
 		},
+		frame: false,
+		titleBarStyle: 'hidden'
 		//icon: __dirname + '/icon.svg',
 	});
 
+	/*
 	var menuTemplate = [
 		{
 			label: '...',
@@ -47,7 +50,7 @@ function createWindow () {
 	win.setMenu(menu);
 
 	win.removeMenu();
-
+*/
 	// and load the index.html of the app.
 	win.loadURL(url.format({
 		pathname: path.join(__dirname, '../templates/index.html'),

@@ -30,11 +30,14 @@ const electron = require('electron'),
 	mime = require('mime'),
 	sha1 = require('sha1'),
 	p = require('path'),
-	$ = require('jquery');
+	$ = require('jquery'),
+	customTitlebar = require('custom-electron-titlebar');
 
 //console.timeEnd('Require time 1');
 
 var testVar = 'test';
+
+var MyTitleBar;
 
 var handlebarsContext = {};
 var language = {};
@@ -191,7 +194,7 @@ storage.start(function(){
 
 	//console.time('Load body');
 
-	template.loadInQuery('body', 'body.html');
+	template.loadInQuery('body .container-after-titlebar', 'body.html');
 
 	//console.timeEnd('Load body');
 
@@ -213,8 +216,8 @@ function startApp()
 
 	document.fonts.onloadingdone = function (fontFaceSetEvent) {
 
-		$('body .app').css('display', 'block');
-		$('body .preload').css('display', 'none');
+		$('body .container-after-titlebar .app').css('display', 'block');
+		$('body .container-after-titlebar .preload').css('display', 'none');
 		dom.justifyViewModule();
 
 		if(onReading)
@@ -330,6 +333,18 @@ function loadLanguage(lan = false)
 	if(lan)
 	{
 		loadLanguageMD(language, $.parseJSON(readFileApp('./languages/'+lan+'.json')));
+
+		if(config.nightMode)
+			var color = customTitlebar.Color.fromHex('#212121');
+		else
+			var color = customTitlebar.Color.fromHex('#ffffff');
+
+		MyTitleBar = new customTitlebar.Titlebar({
+			backgroundColor: color,
+			shadow: false
+		});
+
+		MyTitleBar.updateTitle(language.appName);
 
 		generateAppMenu(true);
 		generateAppMenuShortcut();
@@ -468,7 +483,8 @@ function generateAppMenu(force = false)
 		];
 
 		var menu = electron.remote.Menu.buildFromTemplate(menuTemplate);
-		electron.remote.getCurrentWindow().setMenu(menu);
+		//electron.remote.getCurrentWindow().setMenu(menu);
+		MyTitleBar.updateMenu(menu);
 	}
 }
 

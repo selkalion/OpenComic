@@ -739,17 +739,42 @@ function goEnd(force = false)
 	}
 }
 
+function dblClick(e)
+{	
+	e.preventDefault();
+}
+	
+var DELAY = 250, clicks = 0, timer = null;
+
 function leftClick(e)
 {
-	var isTouch = (e.sourceCapabilities && e.sourceCapabilities.firesTouchEvents) ? true : false;
+	clicks++;
+        if(clicks === 1) {
+            timer = setTimeout(function() {
+				clicks = 0;
+				
+				var isTouch = (e.sourceCapabilities && e.sourceCapabilities.firesTouchEvents) ? true : false;
 
-	if(!reading.haveZoom() && (!isTouch || !config.readingMagnifyingGlass))
-	{
-		if(isTouch)
-			reading.goNext();
-		else
-			reading.goPrevious();
-	}
+				if(!reading.haveZoom() && (!isTouch || !config.readingMagnifyingGlass))
+				{
+					if(isTouch)
+						reading.goNext();
+					else
+						reading.goPrevious();
+				}
+				
+            }, DELAY);
+        } else {
+            clearTimeout(timer);
+			clicks = 0;
+			if(!config.readingMagnifyingGlass)
+			{
+				if(currentScale != 1)
+					reading.resetZoom();
+				else
+					reading.zoomInDouble();
+			}
+        }
 }
 
 function rightClick(e)
@@ -1066,6 +1091,18 @@ function zoomIn(animation = true, center = false)
 
 	if(currentScale < 8)
 		currentScale *= 1.25;
+
+	applyScale(animation, currentScale, center);
+}
+
+// Zoom in
+function zoomInDouble(animation = true, center = false)
+{
+	if(zoomMoveData.active)
+		return;
+
+	if(currentScale < 8)
+		currentScale *= 2;
 
 	applyScale(animation, currentScale, center);
 }
@@ -2237,8 +2274,10 @@ module.exports = {
 	goNext: goNext,
 	goEnd: goEnd,
 	leftClick: leftClick,
+	dblClick: dblClick,
 	rightClick: rightClick,
 	zoomIn: zoomIn,
+	zoomInDouble: zoomInDouble,
 	zoomOut: zoomOut,
 	resetZoom: resetZoom,
 	activeMagnifyingGlass: activeMagnifyingGlass,
